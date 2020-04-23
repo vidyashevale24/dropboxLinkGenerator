@@ -1,5 +1,4 @@
 # dropboxLinkGenerator
-<h1>How this works</h1>
 <p>This utility will allow a user to generate the <strong>Sharable Links</strong> in Bulk for all the files within a given folder.</p>
 <hr>
 <h3>1. Generating API Key</h3>
