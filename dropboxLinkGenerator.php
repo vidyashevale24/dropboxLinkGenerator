@@ -1,4 +1,8 @@
 <?php
+/*
+$_POST['folders'] = 'vid';
+$_POST['api_key'] = 'sT6AJ3GA3cAAAAAAAAAADrsbyJ9fn7Sjnqxsb6uyWQ5jvF-KpQIs8yJE8orLkTmY';*/
+
 if (isset($_POST)){
     //Set headers for the API 
     $headers = array();
@@ -61,15 +65,15 @@ if (isset($_POST)){
                     $root = $_SERVER['DOCUMENT_ROOT'];
                     $header = array('File/Folder Name','Sharable Link','File/Folder Path','Size(Bytes)','Folder name','Created Date');
                     $dir = rand();
-                    mkdir($root.'/dropbox_files/'.$dir, 0777, true) ;
-                    $filePath = $root . '/dropbox_files/' .  $dir . '/' .$folder.'.csv' ;
+                    mkdir($root.'/dropbox/dropbox_files/'.$dir, 0777, true) ;
+                    $filePath = $root . '/dropbox/dropbox_files/' .  $dir . '/' .$folder.'.csv' ;
                     $handle = fopen($filePath, "w");
                     fputcsv($handle, $header);
                     //Call to create sharable link function 
                     create_share_link($filesArr,$folder,$handle);
                     $GLOBALS['fileListsArray'][$j]['Msg'] = 'Shared link created successfully.';
                     $GLOBALS['fileListsArray'][$j]['Status'] = 1;
-                    $GLOBALS['fileListsArray'][$j]['File_path'] ='/dropbox_files/' .  $dir . '/' .$folder.'.csv' ;;
+                    $GLOBALS['fileListsArray'][$j]['File_path'] ='/dropbox/dropbox_files/' .  $dir . '/' .$folder.'.csv' ;;
                     $GLOBALS['fileListsArray'][$j]['Folder'] = $folder;
                 }else{
                     if(isset($result->error_summary)){
@@ -188,7 +192,7 @@ if (isset($_POST)){
     //Store links into the db
     function save_links($shareLinkArr){
         include("config.php");
-        $sql = "INSERT INTO dropbox_share_links (`name`, `url`, `path`,`folder_name`,`created_at`,`added_by`)
+        $sql = "INSERT INTO dropbox_share_links (`name`, `url`, `path`,`folder_name`,`created_at`)
         VALUES ('$shareLinkArr[name]', '$shareLinkArr[url]', '$shareLinkArr[path]','$shareLinkArr[folder_name]','$shareLinkArr[created_date]')";
         $con->query($sql);
     }
