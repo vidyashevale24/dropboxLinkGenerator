@@ -4,7 +4,7 @@ $_POST['folders'] = 'vid';
 $_POST['api_key'] = 'sT6AJ3GA3cAAAAAAAAAADrsbyJ9fn7Sjnqxsb6uyWQ5jvF-KpQIs8yJE8orLkTmY';*/
 
 if (isset($_POST)){
-    //Set headers for the API 
+   //Set headers for the API 
     $headers = array();
     $headers[] = 'Authorization: Bearer '.$_POST['api_key'];
     $headers[] = 'Content-Type: application/json';
@@ -63,13 +63,13 @@ if (isset($_POST)){
                 
                     //Store links in CSV file
                     $root = $_SERVER['DOCUMENT_ROOT'];
-                    $header = array('File/Folder Name','Sharable Link','File/Folder Path','Size(Bytes)','Folder name','Created Date');
+                    $header = array('File/Folder Name','Shareable Link','File/Folder Path','Size(Bytes)','Folder name','Created Date');
                     $dir = rand();
                     mkdir($root.'/dropbox/dropbox_files/'.$dir, 0777, true) ;
                     $filePath = $root . '/dropbox/dropbox_files/' .  $dir . '/' .$folder.'.csv' ;
                     $handle = fopen($filePath, "w");
                     fputcsv($handle, $header);
-                    //Call to create sharable link function 
+                    //Call to create Shareable link function 
                     create_share_link($filesArr,$folder,$handle);
                     $GLOBALS['fileListsArray'][$j]['Msg'] = 'Shared link created successfully.';
                     $GLOBALS['fileListsArray'][$j]['Status'] = 1;
@@ -129,7 +129,7 @@ if (isset($_POST)){
 			list_folder_continue($resultCont->cursor,$folder,$filesArr);
 		}
 	}
-    //Create share link funtion to get sharable links
+    //Create share link funtion to get Shareable links
 	function create_share_link($filesArr,$folder,$handle){
         $mh = curl_multi_init();
 
